@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using UnityEngine;
 
 public class Deck : MonoBehaviour
@@ -17,6 +18,15 @@ public class Deck : MonoBehaviour
     void Start()
     {
         GenerateDeck();
+
+        for(int i = 0; i < 52; i++)
+        {
+            Debug.Log(deckCards[i].GetCardNumber() + ", " + deckCards[i].GetCardSuit());
+        }
+
+        Debug.Log("SHUFFLE!");
+
+        ShuffleDeck();
 
         for(int i = 0; i < 52; i++)
         {
@@ -50,6 +60,22 @@ public class Deck : MonoBehaviour
             {
                 deckCards.Add(new Card(i-39, Suits["Spades"]));
             }
+        }
+    }
+
+    void ShuffleDeck()
+    {
+        // Modern Fisher-Yates Shuffle altered to move every card at least once
+        // https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
+
+        for (int i = 51; i > 0; i--)
+        {
+            int cardIndex = Random.Range(0, i-1);
+
+            Card randomCard = deckCards[cardIndex];
+
+            deckCards[cardIndex] = deckCards[i];
+            deckCards[i] = randomCard;
         }
     }
 }

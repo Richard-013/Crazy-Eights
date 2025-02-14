@@ -18,20 +18,7 @@ public class Deck : MonoBehaviour
     void Start()
     {
         GenerateDeck();
-
-        for(int i = 0; i < 52; i++)
-        {
-            Debug.Log(deckCards[i].GetCardNumber() + ", " + deckCards[i].GetCardSuit());
-        }
-
-        Debug.Log("SHUFFLE!");
-
         ShuffleDeck();
-
-        for(int i = 0; i < 52; i++)
-        {
-            Debug.Log(deckCards[i].GetCardNumber() + ", " + deckCards[i].GetCardSuit());
-        }
     }
 
     // Update is called once per frame

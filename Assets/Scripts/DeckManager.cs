@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Deck : MonoBehaviour
+public class DeckManager : MonoBehaviour
 {
-    public List<Card> deckCards = new List<Card>();
+    public List<Card> deck = new List<Card>();
 
     private Dictionary<string, int> Suits = new Dictionary<string, int>()
     {
@@ -26,19 +26,19 @@ public class Deck : MonoBehaviour
         {
             if(i < 14)
             {
-                deckCards.Add(new Card(i, Suits["Clubs"]));
+                deck.Add(new Card(i, Suits["Clubs"]));
             }
             else if(i < 27)
             {
-                deckCards.Add(new Card(i-13, Suits["Diamonds"]));
+                deck.Add(new Card(i-13, Suits["Diamonds"]));
             }
             else if(i < 40)
             {
-                deckCards.Add(new Card(i-26, Suits["Hearts"]));
+                deck.Add(new Card(i-26, Suits["Hearts"]));
             }
             else
             {
-                deckCards.Add(new Card(i-39, Suits["Spades"]));
+                deck.Add(new Card(i-39, Suits["Spades"]));
             }
         }
     }
@@ -52,17 +52,17 @@ public class Deck : MonoBehaviour
         {
             int cardIndex = Random.Range(0, i-1);
 
-            Card randomCard = deckCards[cardIndex];
+            Card randomCard = deck[cardIndex];
 
-            deckCards[cardIndex] = deckCards[i];
-            deckCards[i] = randomCard;
+            deck[cardIndex] = deck[i];
+            deck[i] = randomCard;
         }
     }
 
     public Card DrawCard()
     {
-        Card nextCard = deckCards[0];
-        deckCards.RemoveAt(0);
+        Card nextCard = deck[0];
+        deck.RemoveAt(0);
 
         return nextCard;
     }

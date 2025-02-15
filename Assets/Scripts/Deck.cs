@@ -65,4 +65,12 @@ public class Deck : MonoBehaviour
             deckCards[i] = randomCard;
         }
     }
+
+    Card DrawCard()
+    {
+        Card nextCard = deckCards[0];
+        deckCards.RemoveAt(0);
+
+        return nextCard;
+    }
 }

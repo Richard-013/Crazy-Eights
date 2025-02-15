@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeckManager : MonoBehaviour
+public class CardDeck
 {
     public List<Card> deck = new List<Card>();
 
@@ -13,8 +13,7 @@ public class DeckManager : MonoBehaviour
         { "Spades", 3 }
     };
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         GenerateDeck();
         ShuffleDeck();

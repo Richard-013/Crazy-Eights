@@ -1,24 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     private const int MAX_NUMBER_OF_PLAYERS = 8;
     private const int MIN_NUMBER_OF_PLAYERS = 2;
 
+    private CardDeck deck;
     public Player[] players;
     private int numberOfPlayers = 2;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        deck = new CardDeck();
     }
 
     public void SetNumberOfPlayers(int numPlayers)

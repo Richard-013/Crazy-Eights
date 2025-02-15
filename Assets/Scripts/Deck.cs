@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.ExceptionServices;
 using UnityEngine;
 
 public class Deck : MonoBehaviour
@@ -19,12 +18,6 @@ public class Deck : MonoBehaviour
     {
         GenerateDeck();
         ShuffleDeck();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void GenerateDeck()

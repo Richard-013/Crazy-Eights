@@ -59,7 +59,7 @@ public class Deck : MonoBehaviour
         }
     }
 
-    Card DrawCard()
+    public Card DrawCard()
     {
         Card nextCard = deckCards[0];
         deckCards.RemoveAt(0);

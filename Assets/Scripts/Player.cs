@@ -31,4 +31,25 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Turn(bool isOpponentTurn)
+    {
+        if(isOpponentTurn)
+        {
+            OpponentTurn();
+        }
+        else
+        {
+            PlayerTurn();
+        }
+    }
+
+    void PlayerTurn()
+    {
+        Debug.Log("The last card to be played was: " + game.lastPlayedCard.ReadCard());
+    }
+
+    void OpponentTurn()
+    {
+
+    }
 }

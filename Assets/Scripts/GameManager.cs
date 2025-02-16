@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
         SetNumberOfPlayers(4);
         SetupDeck();
         ShowHands();
+        PlayerTurn();
     }
 
     public void SetNumberOfPlayers(int numPlayers)
@@ -86,5 +87,8 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    void PlayerTurn()
+    {
+        players[HUMAN_PLAYER_INDEX].Turn(false);
     }
 }

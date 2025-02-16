@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     private CardDeck deck;
     private int numberOfPlayers = 2;
+    private int currentPlayer = 0;
 
     public Player[] players;
     public Card lastPlayedCard;
@@ -18,7 +19,7 @@ public class GameManager : MonoBehaviour
         SetNumberOfPlayers(4);
         SetupDeck();
         ShowHands();
-        PlayerTurn();
+        CurrentPlayerTurn();
     }
 
     public void SetNumberOfPlayers(int numPlayers)
@@ -87,8 +88,16 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    void PlayerTurn()
+    void CurrentPlayerTurn()
     {
-        players[HUMAN_PLAYER_INDEX].Turn(false);
+        // If current player is not human, use opponent logic
+        if(currentPlayer != HUMAN_PLAYER_INDEX)
+        {
+            players[currentPlayer].Turn(true);
+        }
+        else
+        {
+            players[currentPlayer].Turn(false);
+        }
     }
 }

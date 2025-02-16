@@ -18,4 +18,17 @@ public class Player : MonoBehaviour
         isOpponent = false;
     }
 
+    public void AddCardToHand(Card newCard)
+    {
+        hand.Add(newCard);
+    }
+
+    public void ShowHand()
+    {
+        for(int i = 0; i < hand.Count; i++)
+        {
+            Debug.Log(hand[i].ReadCard());
+        }
+    }
+
 }

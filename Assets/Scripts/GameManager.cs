@@ -107,4 +107,35 @@ public class GameManager : MonoBehaviour
             players[i].ShowHand();
         }
     }
+
+    void PlayedCardAction(Card playedCard)
+    {
+        int playedCardNumber = playedCard.number;
+
+        if(playedCardNumber == 1)
+        {
+            // Ace
+            lastPlayedCard = playedCard;
+        }
+        else if(playedCardNumber == 2)
+        {
+            // Two
+            lastPlayedCard = playedCard;
+        }
+        else if(playedCardNumber == 8)
+        {
+            // Eight
+            lastPlayedCard = playedCard;
+        }
+        else if(playedCardNumber == 11)
+        {
+            // Jack
+            lastPlayedCard = playedCard;
+        }
+        else
+        {
+            // Regular Cards
+            lastPlayedCard = playedCard;
+        }
+    }
 }

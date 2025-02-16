@@ -13,10 +13,9 @@ public class CardDeck
         { "Spades", 3 }
     };
 
-    void Awake()
+    public CardDeck()
     {
         GenerateDeck();
-        ShuffleDeck();
     }
 
     void GenerateDeck()
@@ -40,6 +39,8 @@ public class CardDeck
                 deck.Add(new Card(i-39, Suits["Spades"]));
             }
         }
+
+        ShuffleDeck();
     }
 
     void ShuffleDeck()

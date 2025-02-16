@@ -3,16 +3,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private List<Card> hand = new List<Card>();
-    private bool isOpponent = true;
-    private Card lastPlayedCard;
+    protected List<Card> hand = new List<Card>();
+    protected Card lastPlayedCard;
+    protected bool isOpponent = true;
+    
+    public bool isTurn = false;
     
     public GameManager game;
-
-    void Awake()
-    {
-        
-    }
 
     public void SetAsPlayer()
     {
@@ -32,42 +29,35 @@ public class Player : MonoBehaviour
         }
     }
 
-    public Card Turn(bool isOpponentTurn, Card recentCard)
+    public virtual Card Turn(Card recentCard)
     {
         lastPlayedCard = recentCard;
-
-        if(isOpponentTurn)
-        {
-            return OpponentTurn();
-        }
-        else
-        {
-            return PlayerTurn();
-        }
-    }
-
-    Card PlayerTurn()
-    {
-        Debug.Log("The last card to be played was: " + lastPlayedCard.ReadCard());
         return hand[0];
     }
 
-    Card OpponentTurn()
+    protected bool IsValidMove(Card chosenCard)
     {
-        return hand[0];
-    }
-
-    bool IsValidMove(Card chosenCard)
-    {
-        if(chosenCard.GetCardSuit() == lastPlayedCard.GetCardSuit())
+        if(chosenCard.suit == lastPlayedCard.suit)
         {
             return true;
         }
-        else if(chosenCard.GetCardNumber() == lastPlayedCard.GetCardNumber())
+        else if(chosenCard.number == lastPlayedCard.number)
         {
             return true;
         }
 
         return false;
+    }
+
+    protected int PlayCard(Card chosenCard)
+    {
+        if(IsValidMove(chosenCard))
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
     }
 }

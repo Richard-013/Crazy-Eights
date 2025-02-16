@@ -455,7 +455,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c2d184eddf1ac4689261e8658e4621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deckPrefab: {fileID: 7790831631668578931, guid: ae38c0fc99b01cb478b605b668e2e5df, type: 3}
+  playerPrefab: {fileID: 7100427504326885129, guid: e7fe2811cfceebc41a4df9e787d3439f, type: 3}
+  opponentPrefab: {fileID: 2915179991285550771, guid: 1b85e1b0d437e3f4f813b19da3b71ffa, type: 3}
   players: []
+  lastPlayedCard: {fileID: 0}
 --- !u!4 &1039131887
 Transform:
   m_ObjectHideFlags: 0

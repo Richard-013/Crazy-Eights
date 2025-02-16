@@ -1,29 +1,15 @@
-public class Card
+using UnityEngine;
+
+public class Card : MonoBehaviour
 {
-    private int cardNumber;
-    private int cardSuit;
-
-    public Card(int number, int suit)
-    {
-        cardNumber = number;
-        cardSuit = suit;
-    }
-
-    public int GetCardNumber()
-    {
-        return cardNumber;
-    }
-
-    public int GetCardSuit()
-    {
-        return cardSuit;
-    }
+    public int number;
+    public int suit;
 
     public string ReadCard()
     {
         string cardStatement;
 
-        switch (cardNumber)
+        switch (number)
         {
             case 1:
                 cardStatement = "The Ace";
@@ -38,11 +24,11 @@ public class Card
                 cardStatement = "The King";
                 break;
             default:
-                cardStatement = "The " + cardNumber;
+                cardStatement = "The " + number;
                 break;
         }
 
-        switch (cardSuit)
+        switch (suit)
         {
             case 0:
                 cardStatement = cardStatement + " of Clubs";
@@ -57,7 +43,7 @@ public class Card
                 cardStatement = cardStatement + " of Spades";
                 return  cardStatement;
             default:
-                cardStatement = cardStatement + " of " + cardSuit;
+                cardStatement = cardStatement + " of " + suit;
                 return  cardStatement;
         }
     }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,8 +9,13 @@ public class GameManager : MonoBehaviour
     private const int HUMAN_PLAYER_INDEX = 0;
 
     private CardDeck deck;
+    public List<Card> playedCards = new List<Card>();
     private int numberOfPlayers = 2;
     private int currentPlayer = 0;
+
+    [SerializeField] public CardDeck deckPrefab;
+    [SerializeField] public Player playerPrefab;
+    [SerializeField] public Player opponentPrefab;
 
     public Player[] players;
     public Card lastPlayedCard;
@@ -19,7 +25,6 @@ public class GameManager : MonoBehaviour
         SetNumberOfPlayers(4);
         SetupDeck();
         ShowHands();
-        CurrentPlayerTurn();
     }
 
     public void SetNumberOfPlayers(int numPlayers)
@@ -46,16 +51,29 @@ public class GameManager : MonoBehaviour
 
         for(int i = 0; i < numberOfPlayers; i++)
         {
-            players[i] = gameObject.AddComponent<Player>();
+            if(i == HUMAN_PLAYER_INDEX)
+            {
+                players[i] = Instantiate(playerPrefab);
+                players[i].name = "Player";
+                players[i].SetAsPlayer();
+            }
+            else
+            {
+                players[i] = Instantiate(opponentPrefab);
+                players[i].name = "Opponent " + i;
+            }
+
+            players[i].transform.parent = this.gameObject.transform;
             players[i].game = this;
         }
-
-        players[HUMAN_PLAYER_INDEX].SetAsPlayer(); // Set the first player in the list as the human player
     }
 
     public void SetupDeck()
     {
-        deck = new CardDeck();
+        deck = Instantiate(deckPrefab);
+        deck.transform.parent = this.gameObject.transform;
+        deck.name = "Card Deck";
+        deck.GenerateDeck();
         GiveInitialHands();
         DrawFirstCard();
     }
@@ -77,6 +95,8 @@ public class GameManager : MonoBehaviour
     void DrawFirstCard()
     {
         lastPlayedCard = deck.DrawCard();
+        playedCards.Add(lastPlayedCard);
+        Debug.Log(lastPlayedCard.ReadCard());
     }
 
     void ShowHands()
@@ -85,21 +105,6 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Player " + i + " Hand:");
             players[i].ShowHand();
-        }
-    }
-    
-    void CurrentPlayerTurn()
-    {
-        Card playedCard;
-        
-        // If current player is not human, use opponent logic
-        if(currentPlayer != HUMAN_PLAYER_INDEX)
-        {
-            playedCard = players[currentPlayer].Turn(true, lastPlayedCard);
-        }
-        else
-        {
-            playedCard = players[currentPlayer].Turn(false, lastPlayedCard);
         }
     }
 }

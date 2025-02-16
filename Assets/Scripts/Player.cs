@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     private List<Card> hand = new List<Card>();
     private bool isOpponent = true;
+    private Card lastPlayedCard;
     
     public GameManager game;
 
@@ -31,25 +32,42 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Turn(bool isOpponentTurn)
+    public Card Turn(bool isOpponentTurn, Card recentCard)
     {
+        lastPlayedCard = recentCard;
+
         if(isOpponentTurn)
         {
-            OpponentTurn();
+            return OpponentTurn();
         }
         else
         {
-            PlayerTurn();
+            return PlayerTurn();
         }
     }
 
-    void PlayerTurn()
+    Card PlayerTurn()
     {
-        Debug.Log("The last card to be played was: " + game.lastPlayedCard.ReadCard());
+        Debug.Log("The last card to be played was: " + lastPlayedCard.ReadCard());
+        return hand[0];
     }
 
-    void OpponentTurn()
+    Card OpponentTurn()
     {
+        return hand[0];
+    }
 
+    bool IsValidMove(Card chosenCard)
+    {
+        if(chosenCard.GetCardSuit() == lastPlayedCard.GetCardSuit())
+        {
+            return true;
+        }
+        else if(chosenCard.GetCardNumber() == lastPlayedCard.GetCardNumber())
+        {
+            return true;
+        }
+
+        return false;
     }
 }

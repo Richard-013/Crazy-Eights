@@ -90,14 +90,16 @@ public class GameManager : MonoBehaviour
     
     void CurrentPlayerTurn()
     {
+        Card playedCard;
+        
         // If current player is not human, use opponent logic
         if(currentPlayer != HUMAN_PLAYER_INDEX)
         {
-            players[currentPlayer].Turn(true);
+            playedCard = players[currentPlayer].Turn(true, lastPlayedCard);
         }
         else
         {
-            players[currentPlayer].Turn(false);
+            playedCard = players[currentPlayer].Turn(false, lastPlayedCard);
         }
     }
 }

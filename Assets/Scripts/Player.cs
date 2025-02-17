@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 
     public void ShowHand()
     {
-        float horizontalDisplacementAmount = 24f/hand.Count;
+        float horizontalDisplacementAmount = 20f/hand.Count;
         float horizontalDisplacement = horizontalDisplacementAmount;
         float cardSeparationDisplacement = 0.025f;
 

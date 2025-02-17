@@ -51,15 +51,15 @@ public class GameManager : MonoBehaviour
     void DefineHandPositions()
     {
         // Preset positions for players to spawn hands at
-        handStartPositions[0] = new Vector3(-12f, 5f, 20f);
-        handStartPositions[1] = new Vector3(-12f, 5f, -20f);
-        handStartPositions[2] = new Vector3(20f, 5f, -12f);
-        handStartPositions[3] = new Vector3(-20f, 5f, -12f);
+        handStartPositions[0] = new Vector3(-10f, 5f, 20f);
+        handStartPositions[1] = new Vector3(-10f, 5f, -20f);
+        handStartPositions[2] = new Vector3(20f, 5f, -10f);
+        handStartPositions[3] = new Vector3(-20f, 5f, -10f);
 
-        handEndPositions[0] = new Vector3(12f, 5f, 20f);
-        handEndPositions[1] = new Vector3(12f, 5f, -20f);
-        handEndPositions[2] = new Vector3(20f, 5f, 12f);
-        handEndPositions[3] = new Vector3(-20f, 5f, 12f);
+        handEndPositions[0] = new Vector3(10f, 5f, 20f);
+        handEndPositions[1] = new Vector3(10f, 5f, -20f);
+        handEndPositions[2] = new Vector3(20f, 5f, 10f);
+        handEndPositions[3] = new Vector3(-20f, 5f, 10f);
     }
 
     void SetupPlayers()

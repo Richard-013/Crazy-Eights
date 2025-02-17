@@ -6,6 +6,7 @@ public class CardDeck : MonoBehaviour
     public Card cardPrefab;
 
     public List<Card> deck = new List<Card>();
+    public List<Material> cardMaterials = new List<Material>();
 
     private Dictionary<string, int> Suits = new Dictionary<string, int>()
     {
@@ -28,6 +29,7 @@ public class CardDeck : MonoBehaviour
                 currentCard.number = i;
                 currentCard.suit = Suits["Clubs"];
                 currentCard.name = currentCard.ReadCard();
+                currentCard.transform.GetChild(0).GetComponent<MeshRenderer>().material = cardMaterials[i-1];
             }
             else if(i < 27)
             {
@@ -35,6 +37,7 @@ public class CardDeck : MonoBehaviour
                 currentCard.number = i-13;
                 currentCard.suit = Suits["Diamonds"];
                 currentCard.name = currentCard.ReadCard();
+                currentCard.transform.GetChild(0).GetComponent<MeshRenderer>().material = cardMaterials[i-1];
             }
             else if(i < 40)
             {
@@ -42,6 +45,7 @@ public class CardDeck : MonoBehaviour
                 currentCard.number = i-26;
                 currentCard.suit = Suits["Hearts"];
                 currentCard.name = currentCard.ReadCard();
+                currentCard.transform.GetChild(0).GetComponent<MeshRenderer>().material = cardMaterials[i-1];
             }
             else
             {
@@ -49,6 +53,7 @@ public class CardDeck : MonoBehaviour
                 currentCard.number = i-39;
                 currentCard.suit = Suits["Spades"];
                 currentCard.name = currentCard.ReadCard();
+                currentCard.transform.GetChild(0).GetComponent<MeshRenderer>().material = cardMaterials[i-1];
             }
         }
 

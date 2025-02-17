@@ -7,7 +7,8 @@ public class Player : MonoBehaviour
     protected Card lastPlayedCard;
     protected bool isOpponent = true;
     
-    public Vector3 position;
+    public Vector3 handStartPosition;
+    public Vector3 handEndPosition;
     public int direction;
     public bool isTurn = false;
     
@@ -25,7 +26,9 @@ public class Player : MonoBehaviour
 
     public void ShowHand()
     {
-        float displacement = 4f;
+        float horizontalDisplacementAmount = 24f/hand.Count;
+        float horizontalDisplacement = horizontalDisplacementAmount;
+        float cardSeparationDisplacement = 0.025f;
 
         for(int i = 0; i < hand.Count; i++)
         {
@@ -55,31 +58,35 @@ public class Player : MonoBehaviour
 
             if(i == 0)
             {
-                nextPosition = position;
-            }
-            else if(i % 2 == 0)
-            {
-                if(direction == 2 || direction == 3)
-                {
-                    nextPosition = position + new Vector3(0f, 0f, displacement);
-                }
-                else
-                {
-                    nextPosition = position + new Vector3(displacement, 0f, 0f);
-                }
-
-                displacement += 4;
+                nextPosition = handStartPosition;
             }
             else
             {
                 if(direction == 2 || direction == 3)
                 {
-                    nextPosition = position + new Vector3(0f, 0f, -displacement);
+                    if(direction == 2)
+                    {
+                        nextPosition = handStartPosition + new Vector3(cardSeparationDisplacement*i, 0f, horizontalDisplacement);
+                    }
+                    else
+                    {
+                        nextPosition = handStartPosition + new Vector3(-cardSeparationDisplacement*i, 0f, horizontalDisplacement);
+                    }
+                    
                 }
                 else
                 {
-                    nextPosition = position + new Vector3(-displacement, 0f, 0f);
+                    if(direction == 0)
+                    {
+                        nextPosition = handStartPosition + new Vector3(horizontalDisplacement, 0f, cardSeparationDisplacement*i);
+                    }
+                    else
+                    {
+                        nextPosition = handStartPosition + new Vector3(horizontalDisplacement, 0f, -cardSeparationDisplacement*i);
+                    }
                 }
+
+                horizontalDisplacement += horizontalDisplacementAmount;
             }
 
             hand[i].transform.Translate(nextPosition);

@@ -205,13 +205,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
+  m_LocalPosition: {x: 0, y: 15, z: -33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,7 +455,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c2d184eddf1ac4689261e8658e4621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deckPrefab: {fileID: 7790831631668578931, guid: ae38c0fc99b01cb478b605b668e2e5df, type: 3}
+  playedCards: []
+  deckPrefab: {fileID: 2669555602046222335, guid: ae38c0fc99b01cb478b605b668e2e5df, type: 3}
   playerPrefab: {fileID: 7100427504326885129, guid: e7fe2811cfceebc41a4df9e787d3439f, type: 3}
   opponentPrefab: {fileID: 2915179991285550771, guid: 1b85e1b0d437e3f4f813b19da3b71ffa, type: 3}
   players: []

@@ -19,7 +19,7 @@ public class CardDeck : MonoBehaviour
     {
         for(int i = 1; i < 53; i++)
         {
-            deck.Add(Instantiate(cardPrefab));
+            deck.Add(Instantiate(cardPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity));
             Card currentCard = deck[i-1];
 
             if(i < 14)

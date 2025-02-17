@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private const int MAX_NUMBER_OF_PLAYERS = 8;
+    private const int MAX_NUMBER_OF_PLAYERS = 4;
     private const int MIN_NUMBER_OF_PLAYERS = 2;
     private const int INITIAL_HAND_SIZE = 7;
     private const int HUMAN_PLAYER_INDEX = 0;
 
     private CardDeck deck;
     public List<Card> playedCards = new List<Card>();
+    private Vector3[] playerPositions = new Vector3[MAX_NUMBER_OF_PLAYERS];
     private int numberOfPlayers = 2;
     private int currentPlayer = 0;
 
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        DefinePlayerPositions();
         SetNumberOfPlayers(4);
         SetupDeck();
         ShowHands();
@@ -45,6 +47,15 @@ public class GameManager : MonoBehaviour
         SetupPlayers();
     }
 
+    void DefinePlayerPositions()
+    {
+        // Preset positions for players to spawn hands at
+        playerPositions[0] = new Vector3(0f, 5f, 20f);
+        playerPositions[1] = new Vector3(0f, 5f, -20f);
+        playerPositions[2] = new Vector3(20f, 5f, 0f);
+        playerPositions[3] = new Vector3(-20f, 5f, 0f);
+    }
+
     void SetupPlayers()
     {
         players = new Player[numberOfPlayers];
@@ -65,6 +76,8 @@ public class GameManager : MonoBehaviour
 
             players[i].transform.parent = this.gameObject.transform;
             players[i].game = this;
+            players[i].position = playerPositions[i];
+            players[i].direction = i;
         }
     }
 

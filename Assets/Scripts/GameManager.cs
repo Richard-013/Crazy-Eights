@@ -96,6 +96,7 @@ public class GameManager : MonoBehaviour
         deck.GenerateDeck();
         GiveInitialHands();
         DrawFirstCard();
+        MoveDeck();
     }
 
     void GiveInitialHands()
@@ -117,6 +118,15 @@ public class GameManager : MonoBehaviour
         lastPlayedCard = deck.DrawCard();
         playedCards.Add(lastPlayedCard);
         Debug.Log(lastPlayedCard.ReadCard());
+    }
+
+    void MoveDeck()
+    {
+        for(int i = 0; i < deck.deck.Count; i++)
+        {
+            deck.deck[i].transform.Translate(new Vector3(4f, 0.015f*i, 0f));
+            deck.deck[i].transform.Rotate(new Vector3(0f, 0f, 180f));
+        }
     }
 
     void ShowHands()

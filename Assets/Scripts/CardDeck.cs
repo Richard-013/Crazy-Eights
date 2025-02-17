@@ -78,8 +78,9 @@ public class CardDeck : MonoBehaviour
 
     public Card DrawCard()
     {
-        Card nextCard = deck[0];
-        deck.RemoveAt(0);
+        int topCardIndex = deck.Count-1;
+        Card nextCard = deck[topCardIndex];
+        deck.RemoveAt(topCardIndex);
 
         return nextCard;
     }

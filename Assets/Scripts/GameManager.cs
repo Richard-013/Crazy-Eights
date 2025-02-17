@@ -168,4 +168,9 @@ public class GameManager : MonoBehaviour
             lastPlayedCard = playedCard;
         }
     }
+
+    public Card DrawCardForPlayer()
+    {
+        return deck.DrawCard();
+    }
 }

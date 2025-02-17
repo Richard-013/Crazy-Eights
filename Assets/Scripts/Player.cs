@@ -125,4 +125,9 @@ public class Player : MonoBehaviour
             return 1;
         }
     }
+
+    protected void DrawCard()
+    {
+        AddCardToHand(game.DrawCardForPlayer());
+    }
 }

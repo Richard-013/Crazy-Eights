@@ -9,42 +9,42 @@ public class Card : MonoBehaviour
     {
         string cardStatement;
 
-        switch (number)
-        {
-            case 1:
-                cardStatement = "The Ace";
-                break;
-            case 11:
-                cardStatement = "The Jack";
-                break;
-            case 12:
-                cardStatement = "The Queen";
-                break;
-            case 13:
-                cardStatement = "The King";
-                break;
-            default:
-                cardStatement = "The " + number;
-                break;
-        }
-
         switch (suit)
         {
             case 0:
-                cardStatement = cardStatement + " of Clubs";
-                return  cardStatement;
+                cardStatement = "cardClubs";
+                break;
             case 1:
-                cardStatement = cardStatement + " of Diamonds";
-                return  cardStatement;
+                cardStatement = "cardDiamonds";
+                break;
             case 2:
-                cardStatement = cardStatement + " of Hearts";
-                return  cardStatement;
+                cardStatement = "cardHearts";
+                break;
             case 3:
-                cardStatement = cardStatement + " of Spades";
-                return  cardStatement;
+                cardStatement = "cardSpades";
+                break;
             default:
-                cardStatement = cardStatement + " of " + suit;
-                return  cardStatement;
+                cardStatement = "card" + suit;
+                break;
+        }
+
+        switch (number)
+        {
+            case 1:
+                cardStatement += "A";
+                return cardStatement;
+            case 11:
+                cardStatement += "J";
+                return cardStatement;
+            case 12:
+                cardStatement += "Q";
+                return cardStatement;
+            case 13:
+                cardStatement += "K";
+                return cardStatement;
+            default:
+                cardStatement += number.ToString();
+                return cardStatement;
         }
     }
 }

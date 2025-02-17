@@ -34,30 +34,38 @@ public class Player : MonoBehaviour
             Vector3 nextPosition;
             Vector3 nextRotate;
 
+            switch(direction)
+            {
+                case 0:
+                    nextRotate = new Vector3(90f, 0f, 0f);
+                    break;
+                case 1:
+                    nextRotate = new Vector3(90f, 180f, 0f);
+                    break;
+                case 2:
+                    nextRotate = new Vector3(90f, 90f, 0f);
+                    break;
+                case 3:
+                    nextRotate = new Vector3(90f, -90f, 0f);
+                    break;
+                default:
+                    nextRotate = new Vector3(0f, 0f, 0f);
+                    break;
+            }
+
             if(i == 0)
             {
                 nextPosition = position;
-
-                if(direction == 2 || direction == 3)
-                {
-                    nextRotate = new Vector3(90f, 90f, 0f);
-                }
-                else
-                {
-                    nextRotate = new Vector3(90f, 0f, 0f);
-                }
             }
             else if(i % 2 == 0)
             {
                 if(direction == 2 || direction == 3)
                 {
                     nextPosition = position + new Vector3(0f, 0f, displacement);
-                    nextRotate = new Vector3(90f, 90f, 0f);
                 }
                 else
                 {
                     nextPosition = position + new Vector3(displacement, 0f, 0f);
-                    nextRotate = new Vector3(90f, 0f, 0f);
                 }
 
                 displacement += 4;
@@ -67,12 +75,10 @@ public class Player : MonoBehaviour
                 if(direction == 2 || direction == 3)
                 {
                     nextPosition = position + new Vector3(0f, 0f, -displacement);
-                    nextRotate = new Vector3(90f, 90f, 0f);
                 }
                 else
                 {
                     nextPosition = position + new Vector3(-displacement, 0f, 0f);
-                    nextRotate = new Vector3(90f, 0f, 0f);
                 }
             }
 

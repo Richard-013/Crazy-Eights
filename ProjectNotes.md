@@ -14,3 +14,12 @@ Goal is to have no cards
 Draw a card if can't play
 
 Can play matching suit or number
+
+Features to add next:
+    - Sort hand (by suit or by face value)
+    - Play card
+        - Card motion
+        - Card effects
+    - Basic opponent logic
+        - Give players ability to see how many cards other players have
+        - Always try to skip players with less cards than you

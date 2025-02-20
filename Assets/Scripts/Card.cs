@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
+    [SerializeField] private float velocity = 10;
+    [SerializeField] private float rotationalVelocity = 100;
+    private bool currentlyMoving = false;
+    private bool currentlyRotating = false;
 
     public int number;
     public int suit;
@@ -67,4 +71,13 @@ public class Card : MonoBehaviour
         faceHidden = false;
     }
 
+    public void MoveCard(Vector3 targetPosition, Vector3 targetRotation)
+    {
+        // https://stackoverflow.com/questions/66259215/move-gameobject-between-two-points-with-ease-in-and-ease-out
+        if(currentlyMoving)
+        {
+            return;
+        }
+
+    }
 }

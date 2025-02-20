@@ -264,5 +264,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54865b467f9c4b445b024d1c2797044f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  velocity: 10
+  rotationalVelocity: 100
   number: 0
   suit: 0
+  faceMaterial: {fileID: 0}
+  blankFaceMaterial: {fileID: 2100000, guid: efe8e76092b37b74e8bef73164e0af4f, type: 2}

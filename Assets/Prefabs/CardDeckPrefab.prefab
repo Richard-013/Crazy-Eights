@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 8576771918460572463, guid: d0a8e8314f9aaeb49bf09f3192e9c7ad, type: 3}
+  blankCardMaterial: {fileID: 2100000, guid: efe8e76092b37b74e8bef73164e0af4f, type: 2}
   deck: []
   cardMaterials:
   - {fileID: 2100000, guid: a6726b9672787654582860d3a89e1af5, type: 2}

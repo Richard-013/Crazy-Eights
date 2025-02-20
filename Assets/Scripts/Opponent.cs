@@ -18,11 +18,10 @@ public class Opponent : Player
         return playedCard;
     }
 
-    protected override void DrawCard()
+    public override void DrawCard(Card newCard)
     {
-        Card newCard = game.DrawCardForPlayer();
         AddCardToHand(newCard);
         newCard.HideCardFace();
-        //newCard.MoveCard();
+        ShowHandNoDelay();
     }
 }

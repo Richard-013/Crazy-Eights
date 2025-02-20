@@ -151,10 +151,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    protected virtual void DrawCard()
+    public virtual void DrawCard(Card newCard)
     {
-        Card newCard = game.DrawCardForPlayer();
         AddCardToHand(newCard);
-        //newCard.MoveCard();
+        ShowHandNoDelay();
     }
 }

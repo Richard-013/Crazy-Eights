@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    protected const float HAND_WIDTH = 20f;
+    protected const float CARD_SEPARATION_DISPLACEMENT = 0.025f;
+
     public List<Card> hand = new List<Card>();
     protected Card lastPlayedCard;
     protected bool isOpponent = true;
@@ -29,7 +32,28 @@ public class Player : MonoBehaviour
         newCard.faceHidden = false;
     }
 
-    public void ShowHand()
+    public void ShowHandWithDelay()
+    {
+        float horizontalDisplacementAmount = HAND_WIDTH/hand.Count;
+        float horizontalDisplacement = horizontalDisplacementAmount;
+
+        Vector3 newPosition;
+
+        for(int i = 0; i < hand.Count; i++)
+        {
+            newPosition = CalculateNewHandCardPosition(i, horizontalDisplacement);
+
+            float delay = 0.5f * i;
+
+            hand[i].MoveCard(newPosition, handRotation, delay);
+
+            if(i != 0)
+            {
+                horizontalDisplacement += horizontalDisplacementAmount;
+            }
+        }
+    }
+
     {
         float horizontalDisplacementAmount = 20f/hand.Count;
         float horizontalDisplacement = horizontalDisplacementAmount;
@@ -46,36 +70,43 @@ public class Player : MonoBehaviour
             else
             {
                 if(direction == 2 || direction == 3)
+
+    protected Vector3 CalculateNewHandCardPosition(int positionInHand, float cardDisplacement)
+    {
+        Vector3 nextPosition;
+
+        if(positionInHand == 0)
+        {
+            return handStartPosition;
+        }
+        else
+        {
+            if(direction == 2 || direction == 3)
+            {
+                if(direction == 2)
                 {
-                    if(direction == 2)
-                    {
-                        nextPosition = handStartPosition + new Vector3(cardSeparationDisplacement*i, 0f, horizontalDisplacement);
-                    }
-                    else
-                    {
-                        nextPosition = handStartPosition + new Vector3(-cardSeparationDisplacement*i, 0f, horizontalDisplacement);
-                    }
-                    
+                    nextPosition = handStartPosition + new Vector3(CARD_SEPARATION_DISPLACEMENT*positionInHand, 0f, cardDisplacement);
                 }
                 else
                 {
-                    if(direction == 0)
-                    {
-                        nextPosition = handStartPosition + new Vector3(horizontalDisplacement, 0f, cardSeparationDisplacement*i);
-                    }
-                    else
-                    {
-                        nextPosition = handStartPosition + new Vector3(horizontalDisplacement, 0f, -cardSeparationDisplacement*i);
-                    }
+                    nextPosition = handStartPosition + new Vector3(-CARD_SEPARATION_DISPLACEMENT*positionInHand, 0f, cardDisplacement);
                 }
-
-                horizontalDisplacement += horizontalDisplacementAmount;
+                
             }
-
-            float delay = 0.5f * i;
-
-            hand[i].MoveCard(nextPosition, handRotation, delay);
+            else
+            {
+                if(direction == 0)
+                {
+                    nextPosition = handStartPosition + new Vector3(cardDisplacement, 0f, CARD_SEPARATION_DISPLACEMENT*positionInHand);
+                }
+                else
+                {
+                    nextPosition = handStartPosition + new Vector3(cardDisplacement, 0f, -CARD_SEPARATION_DISPLACEMENT*positionInHand);
+                }
+            }
         }
+
+        return nextPosition;
     }
 
     public virtual Card Turn(Card recentCard)

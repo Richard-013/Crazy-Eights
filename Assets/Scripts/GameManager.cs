@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
     {
         lastPlayedCard = deck.DrawCard();
         playedCards.Add(lastPlayedCard);
-        Debug.Log(lastPlayedCard.ReadCard());
+        playedCards[0].MoveCard(Vector3.zero, Vector3.zero);
     }
 
     void MoveDeck()

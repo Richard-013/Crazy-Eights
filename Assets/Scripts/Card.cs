@@ -82,6 +82,16 @@ public class Card : MonoBehaviour
         StartCoroutine(SmoothMovementToPoint(targetPosition, targetRotation));
     }
 
+    public void MoveCard(Vector3 targetPosition, Vector3 targetRotation, float delay)
+    {
+        // https://stackoverflow.com/questions/66259215/move-gameobject-between-two-points-with-ease-in-and-ease-out
+        if(currentlyMoving)
+        {
+            return;
+        }
+
+        StartCoroutine(SmoothMovementToPoint(targetPosition, targetRotation, delay));
+    }
 
     public IEnumerator SmoothMovementToPoint(Vector3 targetPosition, Vector3 targetRotation)
     {
@@ -103,6 +113,67 @@ public class Card : MonoBehaviour
         float timePassed = 0f;
 
         Coroutine[] coroutine = new Coroutine[1];
+
+        while(timePassed < movementDuration)
+        {
+            if(timePassed < movementDuration)
+            {
+                // Amount of movement completed
+                float movementFactor = timePassed / movementDuration;
+
+                movementFactor = Mathf.SmoothStep(0, 1, movementFactor);
+
+                transform.position = Vector3.Lerp(startPosition, targetPosition, movementFactor);
+            }
+            
+            // Start card rotation once half the movement is complete
+            if(!currentlyRotating && timePassed > movementDurationMidPoint)
+            {
+                coroutine[0] = StartCoroutine(SmoothRotationToEulerAngles(targetRotation));
+            }
+
+            yield return null;
+
+            timePassed += Time.deltaTime;
+        }
+
+        // Final adjustment for clean coordinates
+        transform.position = targetPosition;
+
+        // Wait for rotation to complete
+        yield return coroutine[0];
+        
+        currentlyMoving = false;
+    }
+
+    // SmoothMovementToPoint Coroutine but with a delay before movement begins
+    public IEnumerator SmoothMovementToPoint(Vector3 targetPosition, Vector3 targetRotation, float delay)
+    {
+        // Don't try to move the card if it is already in motion
+        if(currentlyMoving)
+        {
+            yield break;
+        }
+
+        currentlyMoving = true;
+
+        Vector3 startPosition = transform.position;
+
+        float distanceBetweenPoints = Vector3.Distance(startPosition, targetPosition);
+
+        float movementDuration = distanceBetweenPoints / velocity;
+        float movementDurationMidPoint = movementDuration/2;
+
+        // Add a delay to each card
+        float timePassed = 0f - delay;
+
+        Coroutine[] coroutine = new Coroutine[1];
+
+        while(timePassed < 0)
+        {
+            timePassed += Time.deltaTime;
+            yield return null;
+        }
 
         while(timePassed < movementDuration)
         {

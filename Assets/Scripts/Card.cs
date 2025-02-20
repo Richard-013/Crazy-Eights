@@ -71,6 +71,16 @@ public class Card : MonoBehaviour
         faceHidden = false;
     }
 
+    public void MoveCard(Vector3 targetPosition)
+    {
+        if(currentlyMoving)
+        {
+            return;
+        }
+
+        StartCoroutine(SmoothMovementToPoint(targetPosition));
+    }
+
     public void MoveCard(Vector3 targetPosition, Vector3 targetRotation)
     {
         if(currentlyMoving)
@@ -89,6 +99,47 @@ public class Card : MonoBehaviour
         }
 
         StartCoroutine(SmoothMovementToPoint(targetPosition, targetRotation, delay));
+    }
+
+    public IEnumerator SmoothMovementToPoint(Vector3 targetPosition)
+    {
+        // Don't try to move the card if it is already in motion
+        if(currentlyMoving)
+        {
+            yield break;
+        }
+
+        currentlyMoving = true;
+
+        Vector3 startPosition = transform.position;
+
+        float distanceBetweenPoints = Vector3.Distance(startPosition, targetPosition);
+
+        float movementDuration = distanceBetweenPoints / velocity;
+
+        float timePassed = 0f;
+
+        while(timePassed < movementDuration)
+        {
+            if(timePassed < movementDuration)
+            {
+                // Amount of movement completed
+                float movementFactor = timePassed / movementDuration;
+
+                movementFactor = Mathf.SmoothStep(0, 1, movementFactor);
+
+                transform.position = Vector3.Lerp(startPosition, targetPosition, movementFactor);
+            }
+
+            yield return null;
+
+            timePassed += Time.deltaTime;
+        }
+
+        // Final adjustment for clean coordinates
+        transform.position = targetPosition;
+        
+        currentlyMoving = false;
     }
 
     public IEnumerator SmoothMovementToPoint(Vector3 targetPosition, Vector3 targetRotation)

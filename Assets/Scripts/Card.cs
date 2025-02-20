@@ -79,6 +79,7 @@ public class Card : MonoBehaviour
             return;
         }
 
+        StartCoroutine(SmoothMovementToPoint(targetPosition, targetRotation));
     }
 
 

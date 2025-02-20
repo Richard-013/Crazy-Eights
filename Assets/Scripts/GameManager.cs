@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public List<Card> playedCards = new List<Card>();
     private Vector3[] handStartPositions = new Vector3[MAX_NUMBER_OF_PLAYERS];
     private Vector3[] handEndPositions = new Vector3[MAX_NUMBER_OF_PLAYERS];
+    private Vector3[] handRotations = new Vector3[MAX_NUMBER_OF_PLAYERS];
     private int numberOfPlayers = 2;
     private int currentPlayer = HUMAN_PLAYER_INDEX;
 
@@ -60,6 +61,11 @@ public class GameManager : MonoBehaviour
         handEndPositions[1] = new Vector3(10f, 5f, -20f);
         handEndPositions[2] = new Vector3(20f, 5f, 10f);
         handEndPositions[3] = new Vector3(-20f, 5f, 10f);
+
+        handRotations[0] = new Vector3(90f, 0f, 0f);
+        handRotations[1] = new Vector3(90f, 180f, 0f);
+        handRotations[2] = new Vector3(90f, 90f, 0f);
+        handRotations[3] = new Vector3(90f, -90f, 0f);
     }
 
     void SetupPlayers()
@@ -84,7 +90,9 @@ public class GameManager : MonoBehaviour
             players[i].game = this;
             players[i].handStartPosition = handStartPositions[i];
             players[i].handEndPosition = handEndPositions[i];
+            players[i].handRotation = handRotations[i];
             players[i].direction = i;
+            players[i].playerNumber = i+1;
         }
     }
 

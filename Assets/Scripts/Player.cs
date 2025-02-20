@@ -3,13 +3,17 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    protected List<Card> hand = new List<Card>();
+    public List<Card> hand = new List<Card>();
     protected Card lastPlayedCard;
     protected bool isOpponent = true;
     
     public Vector3 handStartPosition;
     public Vector3 handEndPosition;
+
+    public Vector3 handRotation;
+
     public int direction;
+    public int playerNumber;
     public bool isTurn = false;
     
     public GameManager game;
@@ -19,9 +23,10 @@ public class Player : MonoBehaviour
         isOpponent = false;
     }
 
-    public void AddCardToHand(Card newCard)
+    public virtual void AddCardToHand(Card newCard)
     {
         hand.Add(newCard);
+        newCard.faceHidden = false;
     }
 
     public void ShowHand()

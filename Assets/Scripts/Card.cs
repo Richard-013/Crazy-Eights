@@ -73,7 +73,6 @@ public class Card : MonoBehaviour
 
     public void MoveCard(Vector3 targetPosition, Vector3 targetRotation)
     {
-        // https://stackoverflow.com/questions/66259215/move-gameobject-between-two-points-with-ease-in-and-ease-out
         if(currentlyMoving)
         {
             return;
@@ -84,7 +83,6 @@ public class Card : MonoBehaviour
 
     public void MoveCard(Vector3 targetPosition, Vector3 targetRotation, float delay)
     {
-        // https://stackoverflow.com/questions/66259215/move-gameobject-between-two-points-with-ease-in-and-ease-out
         if(currentlyMoving)
         {
             return;

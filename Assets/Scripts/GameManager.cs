@@ -94,9 +94,9 @@ public class GameManager : MonoBehaviour
         deck.transform.parent = this.gameObject.transform;
         deck.name = "Card Deck";
         deck.GenerateDeck();
+        MoveDeck();
         GiveInitialHands();
         DrawFirstCard();
-        MoveDeck();
     }
 
     void GiveInitialHands()

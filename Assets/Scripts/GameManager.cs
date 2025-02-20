@@ -31,6 +31,26 @@ public class GameManager : MonoBehaviour
         ShowHands();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            players[HUMAN_PLAYER_INDEX].DrawCard(DrawCardForPlayer());
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            players[0].DrawCard(DrawCardForPlayer());
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            players[2].DrawCard(DrawCardForPlayer());
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            players[3].DrawCard(DrawCardForPlayer());
+        }
+    }
+
     public void SetNumberOfPlayers(int numPlayers)
     {
         if(numPlayers < MIN_NUMBER_OF_PLAYERS)
@@ -141,7 +161,7 @@ public class GameManager : MonoBehaviour
     {
         for(int i = 0; i < numberOfPlayers; i++)
         {
-            players[i].ShowHand();
+            players[i].ShowHandWithDelay();
         }
     }
 

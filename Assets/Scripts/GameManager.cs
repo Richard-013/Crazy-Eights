@@ -133,7 +133,6 @@ public class GameManager : MonoBehaviour
     {
         for(int i = 0; i < numberOfPlayers; i++)
         {
-            Debug.Log("Player " + i + " Hand:");
             players[i].ShowHand();
         }
     }

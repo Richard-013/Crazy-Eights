@@ -37,29 +37,7 @@ public class Player : MonoBehaviour
 
         for(int i = 0; i < hand.Count; i++)
         {
-            //Debug.Log(hand[i].ReadCard());
-            //Debug.Log(position);
             Vector3 nextPosition;
-            Vector3 nextRotate;
-
-            switch(direction)
-            {
-                case 0:
-                    nextRotate = new Vector3(90f, 0f, 0f);
-                    break;
-                case 1:
-                    nextRotate = new Vector3(90f, 180f, 0f);
-                    break;
-                case 2:
-                    nextRotate = new Vector3(90f, 90f, 0f);
-                    break;
-                case 3:
-                    nextRotate = new Vector3(90f, -90f, 0f);
-                    break;
-                default:
-                    nextRotate = new Vector3(0f, 0f, 0f);
-                    break;
-            }
 
             if(i == 0)
             {
@@ -94,8 +72,9 @@ public class Player : MonoBehaviour
                 horizontalDisplacement += horizontalDisplacementAmount;
             }
 
-            hand[i].transform.Translate(nextPosition);
-            hand[i].transform.Rotate(nextRotate);
+            float delay = 0.5f * i;
+
+            hand[i].MoveCard(nextPosition, handRotation, delay);
         }
     }
 
@@ -131,8 +110,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    protected void DrawCard()
+    protected virtual void DrawCard()
     {
-        AddCardToHand(game.DrawCardForPlayer());
+        Card newCard = game.DrawCardForPlayer();
+        AddCardToHand(newCard);
+        //newCard.MoveCard();
     }
 }

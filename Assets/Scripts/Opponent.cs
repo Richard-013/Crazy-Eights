@@ -3,7 +3,6 @@ public class Opponent : Player
     public override void AddCardToHand(Card newCard)
     {
         hand.Add(newCard);
-        newCard.faceHidden = true;
         newCard.HideCardFace();
     }
 

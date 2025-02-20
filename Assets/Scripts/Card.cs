@@ -1,9 +1,16 @@
+using System.Collections;
 using UnityEngine;
 
 public class Card : MonoBehaviour
 {
+
     public int number;
     public int suit;
+
+    public Material faceMaterial;
+    [SerializeField] private Material blankFaceMaterial;
+
+    public bool faceHidden;
 
     public string ReadCard()
     {
@@ -47,4 +54,17 @@ public class Card : MonoBehaviour
                 return cardStatement;
         }
     }
+
+    public void HideCardFace()
+    {
+        transform.GetChild(0).GetComponent<MeshRenderer>().material = blankFaceMaterial;
+        faceHidden = true;
+    }
+
+    public void ShowCardFace()
+    {
+        transform.GetChild(0).GetComponent<MeshRenderer>().material = faceMaterial;
+        faceHidden = false;
+    }
+
 }

@@ -54,22 +54,32 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ShowHandNoDelay()
     {
-        float horizontalDisplacementAmount = 20f/hand.Count;
+        float horizontalDisplacementAmount = HAND_WIDTH/hand.Count;
         float horizontalDisplacement = horizontalDisplacementAmount;
-        float cardSeparationDisplacement = 0.025f;
+
+        Vector3 newPosition;
 
         for(int i = 0; i < hand.Count; i++)
         {
-            Vector3 nextPosition;
+            newPosition = CalculateNewHandCardPosition(i, horizontalDisplacement);
 
-            if(i == 0)
+            if(i == hand.Count-1)
             {
-                nextPosition = handStartPosition;
+                hand[i].MoveCard(newPosition, handRotation);
             }
             else
             {
-                if(direction == 2 || direction == 3)
+                hand[i].MoveCard(newPosition);
+            }
+
+            if(i != 0)
+            {
+                horizontalDisplacement += horizontalDisplacementAmount;
+            }
+        }
+    }
 
     protected Vector3 CalculateNewHandCardPosition(int positionInHand, float cardDisplacement)
     {

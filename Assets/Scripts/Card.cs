@@ -81,5 +81,93 @@ public class Card : MonoBehaviour
 
     }
 
+
+    public IEnumerator SmoothMovementToPoint(Vector3 targetPosition, Vector3 targetRotation)
+    {
+        // Don't try to move the card if it is already in motion
+        if(currentlyMoving)
+        {
+            yield break;
+        }
+
+        currentlyMoving = true;
+
+        Vector3 startPosition = transform.position;
+
+        float distanceBetweenPoints = Vector3.Distance(startPosition, targetPosition);
+
+        float movementDuration = distanceBetweenPoints / velocity;
+        float movementDurationMidPoint = movementDuration/2;
+
+        float timePassed = 0f;
+
+        Coroutine[] coroutine = new Coroutine[1];
+
+        while(timePassed < movementDuration)
+        {
+            if(timePassed < movementDuration)
+            {
+                // Amount of movement completed
+                float movementFactor = timePassed / movementDuration;
+
+                movementFactor = Mathf.SmoothStep(0, 1, movementFactor);
+
+                transform.position = Vector3.Lerp(startPosition, targetPosition, movementFactor);
+            }
+            
+            // Start card rotation once half the movement is complete
+            if(!currentlyRotating && timePassed > movementDurationMidPoint)
+            {
+                coroutine[0] = StartCoroutine(SmoothRotationToEulerAngles(targetRotation));
+            }
+
+            yield return null;
+
+            timePassed += Time.deltaTime;
+        }
+
+        // Final adjustment for clean coordinates
+        transform.position = targetPosition;
+
+        // Wait for rotation to complete
+        yield return coroutine[0];
+        
+        currentlyMoving = false;
+    }
+
+    private IEnumerator SmoothRotationToEulerAngles(Vector3 targetRotation)
+    {
+        // Don't try to rotate the card if it is already rotating
+        if(currentlyRotating)
+        {
+            yield break;
+        }
+
+        currentlyRotating = true;
+
+        Vector3 startRotation = transform.eulerAngles;
+
+        float rotationalDifference = Vector3.Distance(startRotation, targetRotation);
+        float rotationDuration = rotationalDifference / rotationalVelocity;
+
+        float timePassed = 0f;
+
+        while(timePassed < rotationDuration)
+        {
+            float rotationFactor = timePassed / rotationDuration;
+
+            rotationFactor = Mathf.SmoothStep(0, 1, rotationFactor);
+
+            transform.eulerAngles = Vector3.Lerp(-startRotation, targetRotation, rotationFactor);
+
+            yield return null;
+
+            timePassed += Time.deltaTime;
+        }
+
+        // Final adjustment for clean angles
+        transform.eulerAngles = targetRotation;
+
+        currentlyRotating = false;
     }
 }

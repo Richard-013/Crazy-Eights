@@ -7,6 +7,12 @@ public class Player : MonoBehaviour
     protected const float CARD_SEPARATION_DISPLACEMENT = 0.025f;
 
     public List<Card> hand = new List<Card>();
+
+    protected List<Card> spades = new List<Card>();
+    protected List<Card> diamonds = new List<Card>();
+    protected List<Card> clubs = new List<Card>();
+    protected List<Card> hearts = new List<Card>();
+
     protected Card lastPlayedCard;
     protected bool isOpponent = true;
     
@@ -30,6 +36,24 @@ public class Player : MonoBehaviour
     {
         hand.Add(newCard);
         newCard.faceHidden = false;
+
+        switch(newCard.suit)
+        {
+            case 0:
+                spades.Add(newCard);
+                break;
+            case 1:
+                diamonds.Add(newCard);
+                break;
+            case 2:
+                clubs.Add(newCard);
+                break;
+            case 3:
+                hearts.Add(newCard);
+                break;
+            default:
+                break;
+        }
     }
 
     public void ShowHandWithDelay()

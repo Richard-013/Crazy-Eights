@@ -195,4 +195,85 @@ public class Player : MonoBehaviour
         }
     }
 
+    protected void SortBySuit()
+    {
+        hand = new List<Card>();
+
+        for(int i = 0; i < 4; i++)
+        {
+            SortSuit(i);
+        }
+
+        for(int i = 0; i < 4; i++)
+        {
+            AddSuitToHand(i);
+        }
+    }
+
+    protected void SortSuit(int suit)
+    {
+        List<Card> sortingList;
+
+        switch(suit)
+        {
+            case 0:
+                sortingList = spades;
+                break;
+            case 1:
+                sortingList = diamonds;
+                break;
+            case 2:
+                sortingList = clubs;
+                break;
+            case 3:
+                sortingList = hearts;
+                break;
+            default:
+                sortingList = clubs;
+                break;
+        }
+
+        for(int i = 1; i < sortingList.Count; i++)
+        {
+            Card key = sortingList[i];
+            int comparisonIndex = i - 1;
+
+            while(comparisonIndex >= 0 && sortingList[comparisonIndex].number > key.number)
+            {
+                sortingList[comparisonIndex+1] = sortingList[comparisonIndex];
+                comparisonIndex -= 1;
+            }
+
+            sortingList[comparisonIndex+1] = key;
+        }
+    }
+
+    protected void AddSuitToHand(int suit)
+    {
+        List<Card> suitList;
+
+        switch(suit)
+        {
+            case 0:
+                suitList = spades;
+                break;
+            case 1:
+                suitList = diamonds;
+                break;
+            case 2:
+                suitList = clubs;
+                break;
+            case 3:
+                suitList = hearts;
+                break;
+            default:
+                suitList = clubs;
+                break;
+        }
+
+        for(int i = 0; i < suitList.Count; i++)
+        {
+            hand.Add(suitList[i]);
+        }
+    }
 }

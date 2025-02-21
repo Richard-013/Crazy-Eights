@@ -10,10 +10,10 @@ public class CardDeck : MonoBehaviour
 
     private Dictionary<string, int> Suits = new Dictionary<string, int>()
     {
-        { "Clubs", 0 },
+        { "Spades", 0 },
         { "Diamonds", 1 },
-        { "Hearts", 2 },
-        { "Spades", 3 }
+        { "Clubs", 2 },
+        { "Hearts", 3 }
     };
 
     public void GenerateDeck()
@@ -27,7 +27,7 @@ public class CardDeck : MonoBehaviour
             {
                 currentCard.transform.parent = this.gameObject.transform;
                 currentCard.number = i;
-                currentCard.suit = Suits["Clubs"];
+                currentCard.suit = Suits["Spades"];
                 currentCard.name = currentCard.ReadCard();
                 currentCard.faceMaterial = cardMaterials[i-1];
                 currentCard.ShowCardFace();
@@ -45,7 +45,7 @@ public class CardDeck : MonoBehaviour
             {
                 currentCard.transform.parent = this.gameObject.transform;
                 currentCard.number = i-26;
-                currentCard.suit = Suits["Hearts"];
+                currentCard.suit = Suits["Clubs"];
                 currentCard.name = currentCard.ReadCard();
                 currentCard.faceMaterial = cardMaterials[i-1];
                 currentCard.ShowCardFace();
@@ -54,7 +54,7 @@ public class CardDeck : MonoBehaviour
             {
                 currentCard.transform.parent = this.gameObject.transform;
                 currentCard.number = i-39;
-                currentCard.suit = Suits["Spades"];
+                currentCard.suit = Suits["Hearts"];
                 currentCard.name = currentCard.ReadCard();
                 currentCard.faceMaterial = cardMaterials[i-1];
                 currentCard.ShowCardFace();

@@ -23,16 +23,16 @@ public class Card : MonoBehaviour
         switch (suit)
         {
             case 0:
-                cardStatement = "cardClubs";
+                cardStatement = "cardSpades";
                 break;
             case 1:
                 cardStatement = "cardDiamonds";
                 break;
             case 2:
-                cardStatement = "cardHearts";
+                cardStatement = "cardClubs";
                 break;
             case 3:
-                cardStatement = "cardSpades";
+                cardStatement = "cardHearts";
                 break;
             default:
                 cardStatement = "card" + suit;

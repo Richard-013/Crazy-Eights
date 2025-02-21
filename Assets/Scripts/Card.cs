@@ -7,6 +7,7 @@ public class Card : MonoBehaviour
     [SerializeField] private float rotationalVelocity = 100;
     private bool currentlyMoving = false;
     private bool currentlyRotating = false;
+    private bool rotatedToHand = false;
 
     public int number;
     public int suit;
@@ -176,7 +177,7 @@ public class Card : MonoBehaviour
             }
             
             // Start card rotation once half the movement is complete
-            if(!currentlyRotating && timePassed > movementDurationMidPoint)
+            if(!rotatedToHand && !currentlyRotating && timePassed > movementDurationMidPoint)
             {
                 coroutine[0] = StartCoroutine(SmoothRotationToEulerAngles(targetRotation));
             }
@@ -237,7 +238,7 @@ public class Card : MonoBehaviour
             }
             
             // Start card rotation once half the movement is complete
-            if(!currentlyRotating && timePassed > movementDurationMidPoint)
+            if(!rotatedToHand && !currentlyRotating && timePassed > movementDurationMidPoint)
             {
                 coroutine[0] = StartCoroutine(SmoothRotationToEulerAngles(targetRotation));
             }
@@ -290,5 +291,6 @@ public class Card : MonoBehaviour
         transform.eulerAngles = targetRotation;
 
         currentlyRotating = false;
+        rotatedToHand = true;
     }
 }

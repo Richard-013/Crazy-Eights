@@ -65,14 +65,7 @@ public class Player : MonoBehaviour
         {
             newPosition = CalculateNewHandCardPosition(i, horizontalDisplacement);
 
-            if(i == hand.Count-1)
-            {
-                hand[i].MoveCard(newPosition, handRotation);
-            }
-            else
-            {
-                hand[i].MoveCard(newPosition);
-            }
+            hand[i].MoveCard(newPosition, handRotation);
 
             if(i != 0)
             {

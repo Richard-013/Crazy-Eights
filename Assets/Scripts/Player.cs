@@ -173,4 +173,26 @@ public class Player : MonoBehaviour
         AddCardToHand(newCard);
         ShowHandNoDelay();
     }
+
+    protected void SortByValue()
+    {
+        List<Card> sortingList;
+
+        sortingList = hand;
+
+        for(int i = 1; i < sortingList.Count; i++)
+        {
+            Card key = sortingList[i];
+            int comparisonIndex = i - 1;
+
+            while(comparisonIndex >= 0 && sortingList[comparisonIndex].number > key.number)
+            {
+                sortingList[comparisonIndex+1] = sortingList[comparisonIndex];
+                comparisonIndex -= 1;
+            }
+
+            sortingList[comparisonIndex+1] = key;
+        }
+    }
+
 }

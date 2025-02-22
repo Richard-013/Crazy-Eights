@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     private const int MIN_NUMBER_OF_PLAYERS = 2;
     private const int INITIAL_HAND_SIZE = 7;
     private const int HUMAN_PLAYER_INDEX = 1;
+    private const float CARD_STACK_DISPLACEMENT = 0.015f;
 
     private CardDeck deck;
     public List<Card> playedCards = new List<Card>();
@@ -152,7 +153,7 @@ public class GameManager : MonoBehaviour
     {
         for(int i = 0; i < deck.deck.Count; i++)
         {
-            deck.deck[i].transform.Translate(new Vector3(4f, 0.015f*i, 0f));
+            deck.deck[i].transform.Translate(new Vector3(4f, CARD_STACK_DISPLACEMENT*i, 0f));
             deck.deck[i].transform.Rotate(new Vector3(0f, 0f, 180f));
         }
     }

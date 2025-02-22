@@ -51,6 +51,10 @@ public class GameManager : MonoBehaviour
         {
             players[3].DrawCard(DrawCardForPlayer());
         }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            PlayCard(players[HUMAN_PLAYER_INDEX].hand[0]);
+        }
     }
 
     public void SetNumberOfPlayers(int numPlayers)

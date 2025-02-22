@@ -16,7 +16,6 @@ Draw a card if can't play
 Can play matching suit or number
 
 Features to add next:
-    - Sort hand (by suit or by face value)
     - Play card
         - Card motion
         - Card effects

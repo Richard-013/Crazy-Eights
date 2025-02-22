@@ -275,5 +275,21 @@ public class Player : MonoBehaviour
 
         cardList.Reverse();
 
+        // Keep Suits in same order when sorting by value
+        if(sortedByValue)
+        {
+            for(int i = 0; i < cardList.Count-1; i++)
+            {
+                if(cardList[i].number == cardList[i+1].number)
+                {
+                    if(cardList[i].suit > cardList[i+1].suit)
+                    {
+                        Card tempCard = cardList[i+1];
+                        cardList[i+1] = cardList[i];
+                        cardList[i] = tempCard;
+                    }
+                }
+            }
+        }
     }
 }

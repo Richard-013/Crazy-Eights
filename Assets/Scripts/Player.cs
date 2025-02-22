@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     protected Card lastPlayedCard;
     protected bool isOpponent = true;
+    protected bool sortedByValue = true;
     
     public Vector3 handStartPosition;
     public Vector3 handEndPosition;
@@ -54,6 +55,16 @@ public class Player : MonoBehaviour
             default:
                 break;
         }
+
+        if(sortedByValue)
+        {
+            SortByValue();
+        }
+        else
+        {
+            SortBySuit();
+        }
+        
     }
 
     public void ShowHandWithDelay()
@@ -176,11 +187,13 @@ public class Player : MonoBehaviour
 
     protected void SortByValue()
     {
+        sortedByValue = true;
         Sort(hand);
     }
 
     protected void SortBySuit()
     {
+        sortedByValue = false;
         hand = new List<Card>();
 
         for(int i = 0; i < 4; i++)

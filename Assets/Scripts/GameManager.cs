@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     private Vector3[] handRotations = new Vector3[MAX_NUMBER_OF_PLAYERS];
     private int numberOfPlayers = 2;
     private int currentPlayer = HUMAN_PLAYER_INDEX;
+    private bool normalPlayDirection = true;
 
     [SerializeField] public CardDeck deckPrefab;
     [SerializeField] public Player playerPrefab;
@@ -181,30 +182,96 @@ public class GameManager : MonoBehaviour
     {
         int playedCardNumber = playedCard.number;
 
-        if(playedCardNumber == 1)
+        switch(playedCardNumber)
         {
-            // Ace
-            lastPlayedCard = playedCard;
+            case 1:
+                // Ace - Switch Direction of Play
+                if(normalPlayDirection)
+                {
+                    normalPlayDirection = false;
+                }
+                else
+                {
+                    normalPlayDirection = true;
+                }
+                
+                lastPlayedCard = playedCard;
+                break;
+            case 2:
+                // Two - Next Player Picks Up 2 Cards and Misses Turn
+                SetNextPlayerIndex();
+
+                lastPlayedCard = playedCard;
+                break;
+            case 8:
+                // Eight - Next Player Misses Turn
+                SetNextPlayerIndex();
+
+                lastPlayedCard = playedCard;
+                break;
+            case 11:
+                // Jack - Change To Chosen Suit
+                lastPlayedCard = playedCard;
+                break;
+            default:
+                // Regular Cards
+                lastPlayedCard = playedCard;
+                break;
         }
-        else if(playedCardNumber == 2)
+
+    }
+
+    int GetNextPlayerIndex()
+    {
+        if(normalPlayDirection)
         {
-            // Two
-            lastPlayedCard = playedCard;
-        }
-        else if(playedCardNumber == 8)
-        {
-            // Eight
-            lastPlayedCard = playedCard;
-        }
-        else if(playedCardNumber == 11)
-        {
-            // Jack
-            lastPlayedCard = playedCard;
+            if(currentPlayer < players.Length-1)
+            {
+                return currentPlayer+1;
+            else
+            {
+                return 0;
+            }
         }
         else
         {
-            // Regular Cards
-            lastPlayedCard = playedCard;
+            if(currentPlayer > 0)
+            {
+                return currentPlayer-1;
+            }
+            else
+            {
+                return players.Length-1;
+            }
+        }
+    }
+
+    void SetNextPlayerIndex()
+    {
+        if(normalPlayDirection)
+        {
+            if(currentPlayer < players.Length-1)
+            {
+                currentPlayer++;
+            }
+            else
+            {
+                currentPlayer = 0;
+            }
+        }
+        else
+        {
+            if(currentPlayer > 0)
+            {
+                currentPlayer--;
+            }
+            else
+            {
+                currentPlayer = players.Length-1;
+            }
+        }
+    }
+
         }
     }
 

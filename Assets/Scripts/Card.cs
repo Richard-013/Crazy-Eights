@@ -7,7 +7,7 @@ public class Card : MonoBehaviour
     [SerializeField] private float rotationalVelocity = 100;
     private bool currentlyMoving = false;
     private bool currentlyRotating = false;
-    private bool rotatedToHand = false;
+    public bool rotatedToHand = false;
 
     public int number;
     public int suit;

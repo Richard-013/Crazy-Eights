@@ -199,6 +199,7 @@ public class GameManager : MonoBehaviour
                 break;
             case 2:
                 // Two - Next Player Picks Up 2 Cards and Misses Turn
+                PickupCards(2, players[GetNextPlayerIndex()]);
                 SetNextPlayerIndex();
 
                 lastPlayedCard = playedCard;
@@ -219,6 +220,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
+        SetNextPlayerIndex();
     }
 
     int GetNextPlayerIndex()
@@ -228,6 +230,7 @@ public class GameManager : MonoBehaviour
             if(currentPlayer < players.Length-1)
             {
                 return currentPlayer+1;
+            }
             else
             {
                 return 0;
@@ -272,6 +275,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void PickupCards(int numberOfCards, Player targetPlayer)
+    {
+        for(int i = 0; i < numberOfCards; i++)
+        {
+            targetPlayer.AddCardToHand(DrawCardForPlayer());
         }
     }
 

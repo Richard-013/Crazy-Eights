@@ -259,6 +259,7 @@ public class Player : MonoBehaviour
 
     protected void Sort(List<Card> cardList)
     {
+        // Insertion Sort
         for(int i = 1; i < cardList.Count; i++)
         {
             Card key = cardList[i];

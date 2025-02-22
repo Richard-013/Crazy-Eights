@@ -176,23 +176,7 @@ public class Player : MonoBehaviour
 
     protected void SortByValue()
     {
-        List<Card> sortingList;
-
-        sortingList = hand;
-
-        for(int i = 1; i < sortingList.Count; i++)
-        {
-            Card key = sortingList[i];
-            int comparisonIndex = i - 1;
-
-            while(comparisonIndex >= 0 && sortingList[comparisonIndex].number > key.number)
-            {
-                sortingList[comparisonIndex+1] = sortingList[comparisonIndex];
-                comparisonIndex -= 1;
-            }
-
-            sortingList[comparisonIndex+1] = key;
-        }
+        Sort(hand);
     }
 
     protected void SortBySuit()
@@ -212,39 +196,22 @@ public class Player : MonoBehaviour
 
     protected void SortSuit(int suit)
     {
-        List<Card> sortingList;
-
         switch(suit)
         {
             case 0:
-                sortingList = spades;
+                Sort(spades);
                 break;
             case 1:
-                sortingList = diamonds;
+                Sort(diamonds);
                 break;
             case 2:
-                sortingList = clubs;
+                Sort(clubs);
                 break;
             case 3:
-                sortingList = hearts;
+                Sort(hearts);
                 break;
             default:
-                sortingList = clubs;
                 break;
-        }
-
-        for(int i = 1; i < sortingList.Count; i++)
-        {
-            Card key = sortingList[i];
-            int comparisonIndex = i - 1;
-
-            while(comparisonIndex >= 0 && sortingList[comparisonIndex].number > key.number)
-            {
-                sortingList[comparisonIndex+1] = sortingList[comparisonIndex];
-                comparisonIndex -= 1;
-            }
-
-            sortingList[comparisonIndex+1] = key;
         }
     }
 
@@ -275,5 +242,25 @@ public class Player : MonoBehaviour
         {
             hand.Add(suitList[i]);
         }
+    }
+
+    protected void Sort(List<Card> cardList)
+    {
+        for(int i = 1; i < cardList.Count; i++)
+        {
+            Card key = cardList[i];
+            int comparisonIndex = i - 1;
+
+            while(comparisonIndex >= 0 && cardList[comparisonIndex].number > key.number)
+            {
+                cardList[comparisonIndex+1] = cardList[comparisonIndex];
+                comparisonIndex -= 1;
+            }
+
+            cardList[comparisonIndex+1] = key;
+        }
+
+        cardList.Reverse();
+
     }
 }

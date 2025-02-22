@@ -166,6 +166,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void PlayCard(Card playedCard)
+    {
+        playedCards.Add(playedCard);
+        playedCard.rotatedToHand = false;
+
+        Vector3 playedCardPosition = new Vector3(0f, CARD_STACK_DISPLACEMENT*(playedCards.Count-1), 0f);
+
+        playedCard.MoveCard(playedCardPosition, Vector3.zero);
+        PlayedCardAction(playedCard);
+    }
+
     void PlayedCardAction(Card playedCard)
     {
         int playedCardNumber = playedCard.number;

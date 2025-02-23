@@ -180,6 +180,8 @@ public class GameManager : MonoBehaviour
 
         playedCard.MoveCard(playedCardPosition, Vector3.zero);
         PlayedCardAction(playedCard);
+
+        SetNextPlayerIndex();
     }
 
     void PlayedCardAction(Card playedCard)
@@ -223,8 +225,6 @@ public class GameManager : MonoBehaviour
                 lastPlayedCard = playedCard;
                 break;
         }
-
-        SetNextPlayerIndex();
     }
 
     int GetNextPlayerIndex()

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class GameManager : MonoBehaviour
     private const int MIN_NUMBER_OF_PLAYERS = 2;
     private const int INITIAL_HAND_SIZE = 7;
     private const int HUMAN_PLAYER_INDEX = 1;
-    private const float CARD_STACK_DISPLACEMENT = 0.015f;
+    private const float CARD_STACK_DISPLACEMENT = 0.005f;
 
     private CardDeck deck;
     public List<Card> playedCards = new List<Card>();
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     private int numberOfPlayers = 2;
     private int currentPlayer = HUMAN_PLAYER_INDEX;
     private bool normalPlayDirection = true;
+    private Camera mainCamera;
 
     [SerializeField] public CardDeck deckPrefab;
     [SerializeField] public Player playerPrefab;
@@ -31,10 +33,14 @@ public class GameManager : MonoBehaviour
         SetNumberOfPlayers(4);
         SetupDeck();
         ShowHands();
+
+        mainCamera = Camera.main;
     }
 
     void Update()
     {
+        ClickCard();
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             players[HUMAN_PLAYER_INDEX].DrawCard(DrawCardForPlayer());
@@ -54,6 +60,21 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             PlayCard(players[HUMAN_PLAYER_INDEX].hand[0]);
+        }
+    }
+
+    void ClickCard()
+    {
+        Mouse mouse = Mouse.current;
+        if(mouse.leftButton.wasPressedThisFrame)
+        {
+            Vector3 mousePosition = mouse.position.ReadValue();
+            Ray mouseRay = mainCamera.ScreenPointToRay(mousePosition);
+
+            if(Physics.Raycast(mouseRay, out RaycastHit mouseHit))
+            {
+                Debug.Log(mouseHit.collider.gameObject.name);
+            }
         }
     }
 

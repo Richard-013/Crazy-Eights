@@ -8,6 +8,7 @@ public class Card : MonoBehaviour
     private bool currentlyMoving = false;
     private bool currentlyRotating = false;
     public bool rotatedToHand = false;
+    public bool isClickable = false;
 
     public int number;
     public int suit;

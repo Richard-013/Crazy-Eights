@@ -73,7 +73,11 @@ public class GameManager : MonoBehaviour
 
             if(Physics.Raycast(mouseRay, out RaycastHit mouseHit))
             {
-                Debug.Log(mouseHit.collider.gameObject.name);
+                Card clickedCard = mouseHit.collider.gameObject.GetComponent<Card>();
+                if(clickedCard.isClickable)
+                {
+                    Debug.Log(mouseHit.collider.gameObject.name);
+                }
             }
         }
     }

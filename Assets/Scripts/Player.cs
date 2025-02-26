@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     {
         hand.Add(newCard);
         newCard.faceHidden = false;
+        newCard.isClickable = true;
 
         switch(newCard.suit)
         {
@@ -171,6 +172,7 @@ public class Player : MonoBehaviour
     {
         if(IsValidMove(chosenCard))
         {
+            chosenCard.isClickable = false;
             return 0;
         }
         else
